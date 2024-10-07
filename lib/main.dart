@@ -259,11 +259,10 @@ class HomeScreen extends StatelessWidget {
       ],
     );
   }
-
-  Widget featuredPartnershipCard(BuildContext context) {
+Widget featuredPartnershipCard(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
-      height: context.height / 2.5,
+      height: context.height / 2.4,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
@@ -275,104 +274,94 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      child: Stack(
+      child: Column(
         children: [
-          Column(
+          Stack(
             children: [
               SizedBox(
-                width: double.infinity,
-                height: context.height / 8.6,
-                // Placeholder for image
-                child: Image.asset(AppAssest.rectangle3),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Emeral LLC",
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold)),
-                    Text("Printing & Publishing",
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.teal,
-                        )),
-                    Text(
-                        "Lorem ip dolor sit amet, consectetur adipscingelit, sed do enusmod tempor incididunt ut laboreet dolore magna aliqua, massa enim nec",
-                        style: TextStyle(color: Colors.grey)),
-                    SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Asking for N120M"),
-                            SizedBox(height: 12),
-                            Padding(
-                              padding: EdgeInsets.only(left: 8.0),
-                              child: ImageStackWidget(),
-                            ),
-                            SizedBox(),
-                          ],
-                        ),
-                        CircularProgressBar(),
-                      ],
-                    ),
-                  ],
+                height: context.height / 8.0,
+                child: SizedBox(
+                  width: double.infinity,
+                  height: context.height / 8.6,
+                  // color: Colors.grey[300], // Placeholder for image
+                  child: Image.asset(AppAssest.rectangle3),
                 ),
               ),
+              Positioned(
+                  bottom: 0.0,
+                  right: 10.0,
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 140,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFB6EBE4),
+                            borderRadius: BorderRadius.circular(10.0)),
+                        child: const Center(
+                          child: Text(
+                            "Asking For N120M",
+                            style: TextStyle(color: Color(0xFF076B5E)),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10.0,
+                      ),
+                      Container(
+                        width: 140,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFB6EBE4),
+                            borderRadius: BorderRadius.circular(10.0)),
+                        child: const Center(
+                          child: Text(
+                            "60.005 - 5 months",
+                            style: TextStyle(color: Color(0xFF076B5E)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ))
             ],
           ),
-          // Positioned Icon
-          Positioned(
-            // left: 16,
-            right: 16,
-            top: context.height / 8.6 - 24, // Adjust position as necessary
-            child: Row(
-              
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 4),
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  width: context.width / 3, // Icon size
-                  // height: ,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors
-                        .teal, // Change to your icon color or use Icon widget
-                  ),
-                  child: Center(
-                      child: Text(
-                    'Asking for ₦120M',
+                Text("Emeral LLC",
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                Text("Printing & Publishing",
                     style: TextStyle(
-                        fontSize: 13,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  )), // Example icon
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 4),
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                  width: context.width / 3, // Icon size
-                  // height: ,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors
-                        .teal, // Change to your icon color or use Icon widget
-                  ),
-                  child: Center(
-                      child: Text(
-                    '60.00% - 5 Months',
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  )), // Example icon
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.teal,
+                    )),
+                Text(
+                    "Lorem ip dolor sit amet, consectetur adipscingelit, sed do enusmod tempor incididunt ut laboreet dolore magna aliqua, massa enim nec",
+                    style: TextStyle(color: Colors.grey)),
+                SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Asking for N120M"),
+                        SizedBox(height: 12),
+                        Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: ImageStackWidget(),
+                        ),
+                        SizedBox(),
+                      ],
+                    ),
+                    CircularProgressBar()
+                  ],
                 ),
               ],
             ),
@@ -381,7 +370,6 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
   // Widget featuredPartnershipCard(BuildContext context) {
   //   return Container(
   //     margin: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -397,51 +385,104 @@ class HomeScreen extends StatelessWidget {
   //         ),
   //       ],
   //     ),
-  //     child: Column(
+  //     child: Stack(
   //       children: [
-  //         SizedBox(
-  //           width: double.infinity,
-  //           height: context.height / 8.6,
-  //           // color: Colors.grey[300], // Placeholder for image
-  //           child: Image.asset(AppAssest.rectangle3),
-  //         ),
-  //         const Padding(
-  //           padding: EdgeInsets.all(16.0),
-  //           child: Column(
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               Text("Emeral LLC",
-  //                   style:
-  //                       TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-  //               Text("Printing & Publishing",
-  //                   style: TextStyle(
-  //                     fontSize: 13,
-  //                     fontWeight: FontWeight.bold,
-  //                     color: Colors.teal,
-  //                   )),
-  //               Text(
-  //                   "Lorem ip dolor sit amet, consectetur adipscingelit, sed do enusmod tempor incididunt ut laboreet dolore magna aliqua, massa enim nec",
-  //                   style: TextStyle(color: Colors.grey)),
-  //               SizedBox(height: 8),
-  //               Row(
-  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                 crossAxisAlignment: CrossAxisAlignment.center,
+  //         Column(
+  //           children: [
+  //             SizedBox(
+  //               width: double.infinity,
+  //               height: context.height / 8.6,
+  //               // Placeholder for image
+  //               child: Image.asset(AppAssest.rectangle3),
+  //             ),
+  //             const Padding(
+  //               padding: EdgeInsets.all(16.0),
+  //               child: Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
   //                 children: [
-  //                   Column(
-  //                     mainAxisAlignment: MainAxisAlignment.start,
-  //                     crossAxisAlignment: CrossAxisAlignment.start,
+  //                   Text("Emeral LLC",
+  //                       style: TextStyle(
+  //                           fontSize: 16, fontWeight: FontWeight.bold)),
+  //                   Text("Printing & Publishing",
+  //                       style: TextStyle(
+  //                         fontSize: 13,
+  //                         fontWeight: FontWeight.bold,
+  //                         color: Colors.teal,
+  //                       )),
+  //                   Text(
+  //                       "Lorem ip dolor sit amet, consectetur adipscingelit, sed do enusmod tempor incididunt ut laboreet dolore magna aliqua, massa enim nec",
+  //                       style: TextStyle(color: Colors.grey)),
+  //                   SizedBox(height: 8),
+  //                   Row(
+  //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                     crossAxisAlignment: CrossAxisAlignment.center,
   //                     children: [
-  //                       Text("Asking for N120M"),
-  //                       SizedBox(height: 12),
-  //                       Padding(
-  //                         padding: EdgeInsets.only(left: 8.0),
-  //                         child: ImageStackWidget(),
+  //                       Column(
+  //                         mainAxisAlignment: MainAxisAlignment.start,
+  //                         crossAxisAlignment: CrossAxisAlignment.start,
+  //                         children: [
+  //                           Text("Asking for N120M"),
+  //                           SizedBox(height: 12),
+  //                           Padding(
+  //                             padding: EdgeInsets.only(left: 8.0),
+  //                             child: ImageStackWidget(),
+  //                           ),
+  //                           SizedBox(),
+  //                         ],
   //                       ),
-  //                       SizedBox(),
+  //                       CircularProgressBar(),
   //                     ],
   //                   ),
-  //                   CircularProgressBar()
   //                 ],
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //         // Positioned Icon
+  //         Positioned(
+  //           // left: 16,
+  //           right: 16,
+  //           top: context.height / 8.6 - 24, // Adjust position as necessary
+  //           child: Row(
+              
+  //             children: [
+  //               Container(
+  //                 margin: EdgeInsets.symmetric(horizontal: 4),
+  //                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+  //                 width: context.width / 3, // Icon size
+  //                 // height: ,
+  //                 decoration: BoxDecoration(
+  //                   borderRadius: BorderRadius.circular(12),
+  //                   color: Colors
+  //                       .teal, // Change to your icon color or use Icon widget
+  //                 ),
+  //                 child: Center(
+  //                     child: Text(
+  //                   'Asking for ₦120M',
+  //                   style: TextStyle(
+  //                       fontSize: 13,
+  //                       color: Colors.white,
+  //                       fontWeight: FontWeight.bold),
+  //                 )), // Example icon
+  //               ),
+  //               Container(
+  //                 margin: EdgeInsets.symmetric(horizontal: 4),
+  //                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+  //                 width: context.width / 3, // Icon size
+  //                 // height: ,
+  //                 decoration: BoxDecoration(
+  //                   borderRadius: BorderRadius.circular(12),
+  //                   color: Colors
+  //                       .teal, // Change to your icon color or use Icon widget
+  //                 ),
+  //                 child: Center(
+  //                     child: Text(
+  //                   '60.00% - 5 Months',
+  //                   style: TextStyle(
+  //                       fontSize: 12,
+  //                       color: Colors.white,
+  //                       fontWeight: FontWeight.bold),
+  //                 )), // Example icon
   //               ),
   //             ],
   //           ),
