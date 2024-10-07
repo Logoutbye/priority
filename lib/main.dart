@@ -44,7 +44,10 @@ class HomeScreen extends StatelessWidget {
                 child: Image.asset(AppAssest.house),
               ),
               Image.asset(AppAssest.bus),
-              Image.asset(AppAssest.diagram,color: Colors.black,),
+              Image.asset(
+                AppAssest.diagram,
+                color: Colors.black,
+              ),
               Image.asset(AppAssest.apartment),
               Image.asset(AppAssest.world),
             ],
@@ -214,8 +217,8 @@ class HomeScreen extends StatelessWidget {
           TextButton(
               onPressed: () {},
               child: const Text(
-                "...See All",
-                style: TextStyle(color: Colors.blue),
+                "View All",
+                style: TextStyle(),
               )),
         ],
       ),
@@ -247,7 +250,8 @@ class HomeScreen extends StatelessWidget {
               Text(
                 label,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
               ),
             ],
           ), // Placeholder for icon
@@ -271,51 +275,104 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
+      child: Stack(
         children: [
-          SizedBox(
-            width: double.infinity,
-            height: context.height / 8.6,
-            // color: Colors.grey[300], // Placeholder for image
-            child: Image.asset(AppAssest.rectangle3),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Emeral LLC",
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                Text("Printing & Publishing",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.teal,
-                    )),
-                Text(
-                    "Lorem ip dolor sit amet, consectetur adipscingelit, sed do enusmod tempor incididunt ut laboreet dolore magna aliqua, massa enim nec",
-                    style: TextStyle(color: Colors.grey)),
-                SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+          Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: context.height / 8.6,
+                // Placeholder for image
+                child: Image.asset(AppAssest.rectangle3),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Text("Emeral LLC",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
+                    Text("Printing & Publishing",
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.teal,
+                        )),
+                    Text(
+                        "Lorem ip dolor sit amet, consectetur adipscingelit, sed do enusmod tempor incididunt ut laboreet dolore magna aliqua, massa enim nec",
+                        style: TextStyle(color: Colors.grey)),
+                    SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("Asking for N120M"),
-                        SizedBox(height: 12),
-                        Padding(
-                          padding: EdgeInsets.only(left: 8.0),
-                          child: ImageStackWidget(),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Asking for N120M"),
+                            SizedBox(height: 12),
+                            Padding(
+                              padding: EdgeInsets.only(left: 8.0),
+                              child: ImageStackWidget(),
+                            ),
+                            SizedBox(),
+                          ],
                         ),
-                        SizedBox(),
+                        CircularProgressBar(),
                       ],
                     ),
-                    CircularProgressBar()
                   ],
+                ),
+              ),
+            ],
+          ),
+          // Positioned Icon
+          Positioned(
+            // left: 16,
+            right: 16,
+            top: context.height / 8.6 - 24, // Adjust position as necessary
+            child: Row(
+              
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 4),
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  width: context.width / 3, // Icon size
+                  // height: ,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors
+                        .teal, // Change to your icon color or use Icon widget
+                  ),
+                  child: Center(
+                      child: Text(
+                    'Asking for ₦120M',
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  )), // Example icon
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 4),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                  width: context.width / 3, // Icon size
+                  // height: ,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors
+                        .teal, // Change to your icon color or use Icon widget
+                  ),
+                  child: Center(
+                      child: Text(
+                    '60.00% - 5 Months',
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  )), // Example icon
                 ),
               ],
             ),
@@ -324,6 +381,75 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
+  // Widget featuredPartnershipCard(BuildContext context) {
+  //   return Container(
+  //     margin: const EdgeInsets.symmetric(horizontal: 16.0),
+  //     height: context.height / 2.5,
+  //     decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       borderRadius: BorderRadius.circular(8),
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: Colors.grey.withOpacity(0.2),
+  //           blurRadius: 6,
+  //           spreadRadius: 2,
+  //         ),
+  //       ],
+  //     ),
+  //     child: Column(
+  //       children: [
+  //         SizedBox(
+  //           width: double.infinity,
+  //           height: context.height / 8.6,
+  //           // color: Colors.grey[300], // Placeholder for image
+  //           child: Image.asset(AppAssest.rectangle3),
+  //         ),
+  //         const Padding(
+  //           padding: EdgeInsets.all(16.0),
+  //           child: Column(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               Text("Emeral LLC",
+  //                   style:
+  //                       TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+  //               Text("Printing & Publishing",
+  //                   style: TextStyle(
+  //                     fontSize: 13,
+  //                     fontWeight: FontWeight.bold,
+  //                     color: Colors.teal,
+  //                   )),
+  //               Text(
+  //                   "Lorem ip dolor sit amet, consectetur adipscingelit, sed do enusmod tempor incididunt ut laboreet dolore magna aliqua, massa enim nec",
+  //                   style: TextStyle(color: Colors.grey)),
+  //               SizedBox(height: 8),
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                 crossAxisAlignment: CrossAxisAlignment.center,
+  //                 children: [
+  //                   Column(
+  //                     mainAxisAlignment: MainAxisAlignment.start,
+  //                     crossAxisAlignment: CrossAxisAlignment.start,
+  //                     children: [
+  //                       Text("Asking for N120M"),
+  //                       SizedBox(height: 12),
+  //                       Padding(
+  //                         padding: EdgeInsets.only(left: 8.0),
+  //                         child: ImageStackWidget(),
+  //                       ),
+  //                       SizedBox(),
+  //                     ],
+  //                   ),
+  //                   CircularProgressBar()
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget trendingProjectsRow(context) {
     return Padding(
@@ -426,7 +552,7 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "From N55m",
+                      "from ₦55m ",
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 14,
@@ -623,20 +749,18 @@ class HomeScreen extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.bold)),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Expanded(
-                child: Container(
-                  width: 70,
-                  decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(5)),
-                  // ignore: prefer_const_constructors
-                  child: Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: const Center(
-                      child: Text(
-                        "10 Sellers",
-                        style: TextStyle(color: Colors.white, fontSize: 10),
-                      ),
+              child: Container(
+                width: 70,
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(5)),
+                // ignore: prefer_const_constructors
+                child: Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: const Center(
+                    child: Text(
+                      "10 Sellers",
+                      style: TextStyle(color: Colors.white, fontSize: 10),
                     ),
                   ),
                 ),
