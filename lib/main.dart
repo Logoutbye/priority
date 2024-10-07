@@ -144,11 +144,14 @@ class HomeScreen extends StatelessWidget {
 
               // Business on Lease
               sectionHeader("Business on Lease"),
-              businessOnLeaseRow(),
+              businessOnLeaseCarousel(context),
 
               // Business for Sale
               sectionHeader("Business for Sale"),
-              businessForSaleRow(),
+              businessForSaleCarousel(context),
+              const SizedBox(
+                height: 20.0,
+              ),
             ],
           ),
         ),
@@ -331,7 +334,7 @@ class HomeScreen extends StatelessWidget {
         color: Colors.grey[300],
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Center(child: Text("Trending Project")),
+      child: const Center(child: Text("Trending Project")),
     );
   }
 
@@ -356,7 +359,7 @@ class HomeScreen extends StatelessWidget {
         color: Colors.grey[300],
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Center(child: Text("Property for Sale")),
+      child: const Center(child: Text("Property for Sale")),
     );
   }
 
@@ -381,7 +384,7 @@ class HomeScreen extends StatelessWidget {
         color: Colors.grey[300],
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Center(child: Text("Investment Opportunity")),
+      child: const Center(child: Text("Investment Opportunity")),
     );
   }
 
@@ -415,61 +418,184 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(businessName, style: TextStyle(fontWeight: FontWeight.bold)),
-            Text(sharesInfo, style: TextStyle(fontSize: 12)),
+            Text(businessName,
+                style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(sharesInfo, style: const TextStyle(fontSize: 12)),
           ],
         ),
       ),
     );
   }
 
-  Widget businessOnLeaseRow() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget businessOnLeaseCarousel(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.20,
+      child: PageView(
         children: [
-          businessLeaseCard(),
-          businessLeaseCard(),
+          businessLeaseCard(
+              context, "Business One", "On Lease", "Tag1", Colors.green),
+          businessLeaseCard(
+              context, "Business Two", "On Lease", "Tag2", Colors.orange),
         ],
       ),
     );
   }
 
-  Widget businessLeaseCard() {
-    return Container(
-      width: 150,
-      height: 120,
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Center(child: Text("Business on Lease")),
-    );
-  }
-
-  Widget businessForSaleRow() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget businessForSaleCarousel(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.15,
+      child: PageView(
         children: [
-          businessForSaleCard(),
-          businessForSaleCard(),
+          businessForSaleCard(
+              context, "Malted Inc", "Web Design Service", "Tag3", Colors.blue),
+          businessForSaleCard(
+              context, "Malted Inc", "For Sale", "Tag4", Colors.red),
         ],
       ),
     );
   }
 
-  Widget businessForSaleCard() {
-    return Container(
-      width: 150,
-      height: 120,
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-        borderRadius: BorderRadius.circular(8),
+  Widget businessLeaseCard(BuildContext context, String title, String subtitle,
+      String tag, Color color) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Card(
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        height: 80,
+                        width: 80,
+                        decoration: BoxDecoration(
+                            color: Colors.black,
+                            image: const DecorationImage(
+                                image: AssetImage("assets/rectangleImage.png")),
+                            borderRadius: BorderRadius.circular(
+                                10.0)), // Placeholder for image
+                      ),
+                      const SizedBox(width: 36),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(title,
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w800)),
+                          Text(
+                            subtitle,
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: double.maxFinite,
+                      decoration: BoxDecoration(
+                          color: const Color(0xFF099684).withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(10.0)),
+                      child: const Center(
+                          child: Text(
+                        "N500k per Month",
+                        style: TextStyle(fontSize: 15),
+                      )),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Positioned(
+              top: 8,
+              right: 8,
+              child: Container(
+                width: 130,
+                height: 30,
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF103F5E).withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                    child: Text("N500k+ Monthly Net",
+                        style: TextStyle(color: Colors.black))),
+              ),
+            ),
+          ],
+        ),
       ),
-      child: Center(child: Text("Business for Sale")),
+    );
+  }
+
+  Widget businessForSaleCard(BuildContext context, String title,
+      String subtitle, String tag, Color color) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Card(
+        // width: MediaQuery.of(context).size.width * 0.7,
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 45,
+                    backgroundColor: Colors.grey[400],
+                    backgroundImage: const AssetImage(
+                        "assets/circularImage.png"), // Placeholder for image
+                  ),
+                  const SizedBox(width: 16),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(title,
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w800)),
+                      Text(
+                        subtitle,
+                        style:
+                            const TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  const Text(
+                    "N120m",
+                    style: TextStyle(fontSize: 16, color: Color(0xFF099684)),
+                  )
+                ],
+              ),
+            ),
+            Positioned(
+              top: 8,
+              right: 8,
+              child: Container(
+                width: 130,
+                height: 30,
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF511911).withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                    child: Text("N500k+ Monthly Net",
+                        style: TextStyle(color: Colors.black))),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
