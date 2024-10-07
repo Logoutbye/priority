@@ -1,182 +1,136 @@
 import 'package:flutter/material.dart';
-import 'package:priority/app_assets.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: BusinessScreen(),
+    home: HomeScreen(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 
-class BusinessScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Row(
-          children: [
-            // Text(
-            //   'ANIPARTNA',
-            //   style: TextStyle(
-            //       color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
-            // ),
-            Image.asset(AppAssest.appName),
-            Spacer(),
-            Image.asset(AppAssest.search),
-            SizedBox(width: 16),
-            Image.asset(AppAssest.comment),
-            SizedBox(width: 16),
-            Image.asset(AppAssest.bell),
-            SizedBox(width: 16),
-            CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.grey, // Placeholder for profile image
-              backgroundImage: AssetImage(AppAssest.ellipse),
-            ),
-          ],
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Row(
+            children: [
+              Text(
+                'ANIPARTNA',
+                style: TextStyle(
+                    color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              Spacer(),
+              Icon(Icons.notifications, color: Colors.black),
+              SizedBox(width: 16),
+              Icon(Icons.search, color: Colors.black),
+              SizedBox(width: 16),
+              CircleAvatar(
+                radius: 20,
+                backgroundColor: Colors.grey, // Placeholder for profile image
+              ),
+            ],
+          ),
+          bottom: TabBar(
+            labelColor: Colors.teal,
+            unselectedLabelColor: Colors.black,
+            indicatorColor: Colors.teal,
+            tabs: [
+              Tab(icon: Icon(Icons.home)),
+              Tab(icon: Icon(Icons.business_center)),
+              Tab(icon: Icon(Icons.trending_up)),
+              Tab(icon: Icon(Icons.settings)),
+            ],
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Tab Bar
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Image.asset(AppAssest.house),
-                  Image.asset(AppAssest.bus),
-                  Image.asset(
-                    AppAssest.diagram,
-                    color: Colors.black,
-                  ),
-                  Image.asset(AppAssest.apartment),
-                  Image.asset(AppAssest.world),
-                ],
-              ),
-            ),
-            SizedBox(height: 10),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
-              child: Text(
-                'Businesses',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-              ),
-            ),
-            // Browse and partnership options
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color:Colors.green,
-                        border: Border.all(color: Colors.green),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        "Home",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                    ),
-                    // Container for "Browse Businesses"
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        "Browse Businesses",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        "Browse Businesses",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                    ),
-
-                    // CircleAvatar with three dots in the center
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.green),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 20, // Adjust radius for CircleAvatar
-                          child: Icon(Icons.abc_outlined)),
-                    ),
-                  ],
-                )),
-
-            // Hero Banner
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Carousel Slider
+              SizedBox(
                 height: 150,
-                width: double.infinity,
-                color: Colors.grey[300], // Placeholder for image
-                child:
-                    Center(child: Text("Explore Partnerships on Businesses")),
-              ),
-            ),
-
-            // Action buttons
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: FittedBox(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: PageView(
                   children: [
-                    businessActionButton(Icons.abc, "Invest in a Business"),
-                    businessActionButton(Icons.abc, "Acquire a Business"),
-                    businessActionButton(Icons.abc, "Buy Business Shares"),
-                    businessActionButton(Icons.abc, "Lease a Business"),
+                    sliderItem(),
+                    sliderItem(),
+                    sliderItem(),
                   ],
                 ),
               ),
-            ),
 
-            // Featured Partnership Openings
-            sectionHeader("Featured Partnership Openings"),
-            featuredPartnershipCard(),
-            SizedBox(height: 16),
+              // Action Buttons Grid
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: GridView.count(
+                  crossAxisCount: 4,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  childAspectRatio: 0.8,
+                  children: [
+                    actionButton("Invest in a Business", Colors.teal[100]!),
+                    actionButton("Invest in a Property", Colors.blue[100]!),
+                    actionButton("Venture in a Project", Colors.pink[100]!),
+                    actionButton("Get a Loan", Colors.orange[100]!),
+                    actionButton("Buy a Property", Colors.green[100]!),
+                    actionButton("Acquire a Business", Colors.yellow[100]!),
+                    actionButton("Buy Business Shares", Colors.red[100]!),
+                    actionButton("Lease a Business", Colors.purple[100]!),
+                  ],
+                ),
+              ),
 
-            // Business Shares Sales
-            sectionHeader("Business Shares Sales"),
-            businessSharesRow(),
+              // Featured Partnership Openings Section
+              sectionHeader("Featured Partnership Openings"),
+              featuredPartnershipCard(),
 
-            // Business on Lease
-            sectionHeader("Business on Lease"),
-            businessOnLeaseRow(),
+              // Trending Projects
+              sectionHeader("Trending Projects"),
+              trendingProjectsRow(),
 
-            // Business for Sale
-            sectionHeader("Business for Sale"),
-            businessForSaleRow(),
-          ],
+              // Properties for Sale
+              sectionHeader("Properties for Sale"),
+              propertiesForSaleRow(),
+
+              // Properties Investment Opportunities
+              sectionHeader("Properties Investment Opportunities"),
+              propertiesInvestmentOpportunitiesRow(),
+
+              // Business Shares Listings
+              sectionHeader("Business Shares Listings"),
+              businessSharesListingsRow(),
+
+              // Business on Lease
+              sectionHeader("Business on Lease"),
+              businessOnLeaseRow(),
+
+              // Business for Sale
+              sectionHeader("Business for Sale"),
+              businessForSaleRow(),
+            ],
+          ),
         ),
       ),
     );
   }
 
+  Widget sliderItem() {
+    return Container(
+      margin: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.grey[300], // Placeholder for slider image
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Center(child: Text("Slider Item")),
+    );
+  }
+
   Widget sectionHeader(String title) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -190,13 +144,24 @@ class BusinessScreen extends StatelessWidget {
     );
   }
 
-  Widget businessActionButton(IconData icon, String label) {
+  Widget actionButton(String label, Color color) {
     return Column(
       children: [
-        Icon(icon, size: 40, color: Colors.teal),
+        Container(
+          height: 60,
+          width: 60,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(Icons.abc), // Placeholder for icon
+        ),
         SizedBox(height: 8),
-        Text(label,
-            textAlign: TextAlign.center, style: TextStyle(fontSize: 12)),
+        Text(
+          label,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 12),
+        ),
       ],
     );
   }
@@ -205,9 +170,10 @@ class BusinessScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Container(
+        height: 150,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
           color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),
@@ -216,11 +182,10 @@ class BusinessScreen extends StatelessWidget {
             ),
           ],
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
           children: [
             Container(
-              height: 120,
+              width: 100,
               color: Colors.grey[300], // Placeholder for image
             ),
             Padding(
@@ -228,18 +193,14 @@ class BusinessScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Emeral LLC",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  Text("Printing & Publishing",
-                      style: TextStyle(color: Colors.grey)),
+                  Text("Emeral LLC", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text("Printing & Publishing", style: TextStyle(color: Colors.grey)),
                   SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Asking for N120M"),
-                      Text("57.75% Remaining",
-                          style: TextStyle(color: Colors.green)),
+                      Text("57.75% Remaining", style: TextStyle(color: Colors.green)),
                     ],
                   ),
                 ],
@@ -251,24 +212,96 @@ class BusinessScreen extends StatelessWidget {
     );
   }
 
-  Widget businessSharesRow() {
+  Widget trendingProjectsRow() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          businessShareCard(
-              "Malted Inc", "Up to 30% shares", Colors.blue[100]!),
-          businessShareCard("Nazlet", "Up to 12% shares", Colors.red[100]!),
-          businessShareCard(
-              "Nixon And", "Up to 30% shares", Colors.green[100]!),
+          trendingProjectCard(),
+          trendingProjectCard(),
         ],
       ),
     );
   }
 
-  Widget businessShareCard(
-      String businessName, String sharesInfo, Color color) {
+  Widget trendingProjectCard() {
+    return Container(
+      width: 150,
+      height: 120,
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Center(child: Text("Trending Project")),
+    );
+  }
+
+  Widget propertiesForSaleRow() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          propertyForSaleCard(),
+          propertyForSaleCard(),
+        ],
+      ),
+    );
+  }
+
+  Widget propertyForSaleCard() {
+    return Container(
+      width: 150,
+      height: 120,
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Center(child: Text("Property for Sale")),
+    );
+  }
+
+  Widget propertiesInvestmentOpportunitiesRow() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          propertiesInvestmentCard(),
+          propertiesInvestmentCard(),
+        ],
+      ),
+    );
+  }
+
+  Widget propertiesInvestmentCard() {
+    return Container(
+      width: 150,
+      height: 120,
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Center(child: Text("Investment Opportunity")),
+    );
+  }
+
+  Widget businessSharesListingsRow() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          businessSharesCard("Malted Inc", "Up to 30% shares", Colors.blue[100]!),
+          businessSharesCard("Nazlet", "Up to 12% shares", Colors.red[100]!),
+          businessSharesCard("Nixon And", "Up to 30% shares", Colors.green[100]!),
+        ],
+      ),
+    );
+  }
+
+  Widget businessSharesCard(String businessName, String sharesInfo, Color color) {
     return Container(
       width: 100,
       height: 100,
@@ -295,32 +328,22 @@ class BusinessScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          businessLeaseCard("Malted Inc", "N500k per Month", Colors.teal[100]!),
-          businessLeaseCard("Malted Inc", "N12M per Year", Colors.orange[100]!),
+          businessLeaseCard(),
+          businessLeaseCard(),
         ],
       ),
     );
   }
 
-  Widget businessLeaseCard(String businessName, String price, Color color) {
+  Widget businessLeaseCard() {
     return Container(
       width: 150,
-      height: 80,
+      height: 120,
       decoration: BoxDecoration(
-        color: color,
+        color: Colors.grey[300],
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(businessName, style: TextStyle(fontWeight: FontWeight.bold)),
-            Text(price),
-          ],
-        ),
-      ),
+      child: Center(child: Text("Business on Lease")),
     );
   }
 
@@ -330,32 +353,22 @@ class BusinessScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          businessForSaleCard("Malted Inc", "N120M"),
-          businessForSaleCard("Malted Inc", "N120M"),
+          businessForSaleCard(),
+          businessForSaleCard(),
         ],
       ),
     );
   }
 
-  Widget businessForSaleCard(String businessName, String price) {
+  Widget businessForSaleCard() {
     return Container(
       width: 150,
-      height: 80,
+      height: 120,
       decoration: BoxDecoration(
         color: Colors.grey[300],
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(businessName, style: TextStyle(fontWeight: FontWeight.bold)),
-            Text(price),
-          ],
-        ),
-      ),
+      child: Center(child: Text("Business for Sale")),
     );
   }
 }
