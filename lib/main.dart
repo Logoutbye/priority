@@ -128,19 +128,19 @@ class HomeScreen extends StatelessWidget {
 
               // Trending Projects
               sectionHeader("Trending Projects"),
-              trendingProjectsRow(),
+              trendingProjectsRow(context),
 
               // Properties for Sale
               sectionHeader("Properties for Sale"),
-              propertiesForSaleRow(),
+              propertiesForSaleRow(context),
 
               // Properties Investment Opportunities
               sectionHeader("Properties Investment Opportunities"),
-              propertiesInvestmentOpportunitiesRow(),
+              propertiesInvestmentOpportunitiesRow(context),
 
               // Business Shares Listings
               sectionHeader("Business Shares Listings"),
-              businessSharesListingsRow(),
+              businessSharesListingsRow(context),
 
               // Business on Lease
               sectionHeader("Business on Lease"),
@@ -325,104 +325,279 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget trendingProjectsRow() {
+  Widget trendingProjectsRow(context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          trendingProjectCard(),
-          trendingProjectCard(),
-        ],
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            trendingProjectCard(context, "assets/trending2.png"),
+            const SizedBox(
+              width: 5.0,
+            ),
+            trendingProjectCard(context, "assets/trending1.png"),
+            const SizedBox(
+              width: 5.0,
+            ),
+            trendingProjectCard(context, "assets/trending2.png"),
+            const SizedBox(
+              width: 5.0,
+            ),
+            trendingProjectCard(context, "assets/trending1.png"),
+          ],
+        ),
       ),
     );
   }
 
-  Widget trendingProjectCard() {
+  Widget trendingProjectCard(context, String image) {
     return Container(
-      width: 150,
-      height: 120,
+      width: MediaQuery.of(context).size.width * 0.45,
+      height: MediaQuery.of(context).size.height * 0.25,
       decoration: BoxDecoration(
-        color: Colors.grey[300],
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: const Center(child: Text("Trending Project")),
+          color: Colors.grey[300],
+          borderRadius: BorderRadius.circular(8),
+          image: DecorationImage(image: AssetImage(image), fit: BoxFit.fill)),
     );
   }
 
-  Widget propertiesForSaleRow() {
+  Widget propertiesForSaleRow(context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            propertyForSaleCard(context),
+            propertyForSaleCard(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget propertyForSaleCard(context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.8,
+      height: 120,
+      child: Card(
+        color: Colors.white,
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: 115,
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(10.0),
+                    image: const DecorationImage(
+                        image: AssetImage(
+                          "assets/building.png",
+                        ),
+                        fit: BoxFit.fill)),
+              ),
+            ),
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "1 Plot With Duplex",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                    ),
+                    Text(
+                      "Lekki Phase II, Lagos State",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          color: Colors.grey),
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "From N55m",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          color: Color.fromARGB(255, 87, 190, 125)),
+                    ),
+                    Text(
+                      "Payment plans available",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget propertiesInvestmentOpportunitiesRow(context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          propertyForSaleCard(),
-          propertyForSaleCard(),
-        ],
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            propertiesInvestmentCard(context),
+            const SizedBox(
+              width: 10.0,
+            ),
+            propertiesInvestmentCard(context),
+          ],
+        ),
       ),
     );
   }
 
-  Widget propertyForSaleCard() {
-    return Container(
-      width: 150,
+  Widget propertiesInvestmentCard(context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.8,
       height: 120,
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-        borderRadius: BorderRadius.circular(8),
+      child: Card(
+        color: Colors.white,
+        child: Row(
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "2 Plots 200 by 100",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 14),
+                      ),
+                      Text(
+                        "Empty land",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                            color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "30% Interest",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                            color: Color(0xFF099684)),
+                      ),
+                      Text(
+                        "May 2025 (13 Months)",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                            color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    height: 30,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF099684).withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Center(
+                        child: Text("N1.5m+ for 1%",
+                            style: TextStyle(color: Color(0xFF076B5E)))),
+                  ),
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        "25.75k",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        "Investors",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-      child: const Center(child: Text("Property for Sale")),
     );
   }
 
-  Widget propertiesInvestmentOpportunitiesRow() {
+  Widget businessSharesListingsRow(context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          propertiesInvestmentCard(),
-          propertiesInvestmentCard(),
-        ],
-      ),
-    );
-  }
-
-  Widget propertiesInvestmentCard() {
-    return Container(
-      width: 150,
-      height: 120,
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: const Center(child: Text("Investment Opportunity")),
-    );
-  }
-
-  Widget businessSharesListingsRow() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          businessSharesCard(
-              "Malted Inc", "Up to 30% shares", Colors.blue[100]!),
-          businessSharesCard("Nazlet", "Up to 12% shares", Colors.red[100]!),
-          businessSharesCard(
-              "Nixon And", "Up to 30% shares", Colors.green[100]!),
-        ],
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            businessSharesCard(
+                context, "Malted Inc", "Up to 30% shares", Colors.blue[100]!),
+            const SizedBox(
+              width: 10.0,
+            ),
+            businessSharesCard(
+                context, "Nazlet", "Up to 12% shares", Colors.red[100]!),
+            const SizedBox(
+              width: 10.0,
+            ),
+            businessSharesCard(
+                context, "Nixon And", "Up to 30% shares", Colors.green[100]!),
+          ],
+        ),
       ),
     );
   }
 
   Widget businessSharesCard(
-      String businessName, String sharesInfo, Color color) {
+      context, String businessName, String sharesInfo, Color color) {
     return Container(
-      width: 100,
-      height: 100,
+      width: MediaQuery.of(context).size.width * 0.33,
       decoration: BoxDecoration(
-        color: color,
+        color: color.withOpacity(0.7),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Padding(
@@ -430,8 +605,43 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Padding(
+              padding: EdgeInsets.all(4.0),
+              child: Text("more current rates",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                  )),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CircleAvatar(
+                radius: 30,
+                backgroundImage: AssetImage("assets/rectangleImage.png"),
+              ),
+            ),
             Text(businessName,
                 style: const TextStyle(fontWeight: FontWeight.bold)),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Expanded(
+                child: Container(
+                  width: 70,
+                  decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(5)),
+                  // ignore: prefer_const_constructors
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: const Center(
+                      child: Text(
+                        "10 Sellers",
+                        style: TextStyle(color: Colors.white, fontSize: 10),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Text(sharesInfo, style: const TextStyle(fontSize: 12)),
           ],
         ),
