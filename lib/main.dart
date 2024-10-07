@@ -352,6 +352,22 @@ class HomeScreen extends StatelessWidget {
           children: [
             Text(businessName,
                 style: const TextStyle(fontWeight: FontWeight.bold)),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 20.0,
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(5)),
+                // ignore: prefer_const_constructors
+                child: Center(
+                  child: const Text(
+                    "10 Sellers",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
             Text(sharesInfo, style: const TextStyle(fontSize: 12)),
           ],
         ),
