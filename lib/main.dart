@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:priority/app_assets.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -11,26 +12,25 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
           title: Row(
             children: [
-              Text(
-                'ANIPARTNA',
-                style: TextStyle(
-                    color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              Spacer(),
-              Icon(Icons.notifications, color: Colors.black),
-              SizedBox(width: 16),
-              Icon(Icons.search, color: Colors.black),
-              SizedBox(width: 16),
+              Image.asset(AppAssest.appName),
+              const Spacer(),
+              Image.asset(AppAssest.search),
+              const SizedBox(width: 16),
+              Image.asset(AppAssest.comment),
+              const SizedBox(width: 16),
+              Image.asset(AppAssest.bell),
+              const SizedBox(width: 16),
               CircleAvatar(
                 radius: 20,
-                backgroundColor: Colors.grey, // Placeholder for profile image
+                backgroundColor: Colors.grey,
+                backgroundImage: AssetImage(AppAssest.ellipse),
               ),
             ],
           ),
@@ -39,10 +39,14 @@ class HomeScreen extends StatelessWidget {
             unselectedLabelColor: Colors.black,
             indicatorColor: Colors.teal,
             tabs: [
-              Tab(icon: Icon(Icons.home)),
-              Tab(icon: Icon(Icons.business_center)),
-              Tab(icon: Icon(Icons.trending_up)),
-              Tab(icon: Icon(Icons.settings)),
+              Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 12),
+                child: Image.asset(AppAssest.house),
+              ),
+              Image.asset(AppAssest.bus),
+              Image.asset(AppAssest.diagram),
+              Image.asset(AppAssest.apartment),
+              Image.asset(AppAssest.world),
             ],
           ),
         ),
@@ -50,6 +54,26 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Good Morining',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(
+                  'Matthew Metong',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
               // Carousel Slider
               SizedBox(
                 height: 150,
@@ -131,15 +155,17 @@ class HomeScreen extends StatelessWidget {
   Widget sectionHeader(String title) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          TextButton(onPressed: () {}, child: Text("...See All")),
-        ],
+      child: FittedBox(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            TextButton(onPressed: () {}, child: Text("...See All")),
+          ],
+        ),
       ),
     );
   }
@@ -193,14 +219,18 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Emeral LLC", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  Text("Printing & Publishing", style: TextStyle(color: Colors.grey)),
+                  Text("Emeral LLC",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text("Printing & Publishing",
+                      style: TextStyle(color: Colors.grey)),
                   SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Asking for N120M"),
-                      Text("57.75% Remaining", style: TextStyle(color: Colors.green)),
+                      Text("57.75% Remaining",
+                          style: TextStyle(color: Colors.green)),
                     ],
                   ),
                 ],
@@ -293,15 +323,18 @@ class HomeScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          businessSharesCard("Malted Inc", "Up to 30% shares", Colors.blue[100]!),
+          businessSharesCard(
+              "Malted Inc", "Up to 30% shares", Colors.blue[100]!),
           businessSharesCard("Nazlet", "Up to 12% shares", Colors.red[100]!),
-          businessSharesCard("Nixon And", "Up to 30% shares", Colors.green[100]!),
+          businessSharesCard(
+              "Nixon And", "Up to 30% shares", Colors.green[100]!),
         ],
       ),
     );
   }
 
-  Widget businessSharesCard(String businessName, String sharesInfo, Color color) {
+  Widget businessSharesCard(
+      String businessName, String sharesInfo, Color color) {
     return Container(
       width: 100,
       height: 100,
