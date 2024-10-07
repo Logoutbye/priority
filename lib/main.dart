@@ -88,28 +88,43 @@ class HomeScreen extends StatelessWidget {
 
               // Action Buttons Grid
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: GridView.count(
-                  crossAxisCount: 4,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  childAspectRatio: 0.8,
-                  children: [
-                    actionButton("Invest in a Business", Colors.teal[100]!),
-                    actionButton("Invest in a Property", Colors.blue[100]!),
-                    actionButton("Venture in a Project", Colors.pink[100]!),
-                    actionButton("Get a Loan", Colors.orange[100]!),
-                    actionButton("Buy a Property", Colors.green[100]!),
-                    actionButton("Acquire a Business", Colors.yellow[100]!),
-                    actionButton("Buy Business Shares", Colors.red[100]!),
-                    actionButton("Lease a Business", Colors.purple[100]!),
-                  ],
-                ),
-              ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      FittedBox(
+                        child: Row(
+                          children: [
+                            actionButton(AppAssest.plant, context,
+                                "Invest in a Business", Colors.teal[100]!),
+                            actionButton(AppAssest.curve, context,
+                                "Invest in a Property", Colors.blue[100]!),
+                            actionButton(AppAssest.blueprint, context,
+                                "Venture in a Project", Colors.pink[100]!),
+                            actionButton(AppAssest.bill, context, "Get a Loan",
+                                Colors.orange[100]!),
+                          ],
+                        ),
+                      ),
+                      FittedBox(
+                        child: Row(
+                          children: [
+                            actionButton(AppAssest.bench, context,
+                                "Buy a Property", Colors.green[100]!),
+                            actionButton(AppAssest.budget, context,
+                                "Acquire a Business", Colors.yellow[100]!),
+                            actionButton(AppAssest.chart, context,
+                                "Buy Business Shares", Colors.red[100]!),
+                            actionButton(AppAssest.rent, context,
+                                "Lease a Business", Colors.purple[100]!),
+                          ],
+                        ),
+                      )
+                    ],
+                  )),
 
               // Featured Partnership Openings Section
               sectionHeader("Featured Partnership Openings"),
-              featuredPartnershipCard(),
+              featuredPartnershipCard(context),
 
               // Trending Projects
               sectionHeader("Trending Projects"),
@@ -143,101 +158,154 @@ class HomeScreen extends StatelessWidget {
 
   Widget sliderItem() {
     return Container(
-      margin: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage(
+              AppAssest.slider,
+            ),
+            fit: BoxFit.fill),
         color: Colors.grey[300], // Placeholder for slider image
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Center(child: Text("Slider Item")),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Click to Complete profile setup!",
+            style: TextStyle(
+                color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            "Complete profile",
+            style: TextStyle(
+                color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            "Submit Proof of Adress",
+            style: TextStyle(
+                color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            "Submit valid ID",
+            style: TextStyle(
+                color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     );
   }
 
   Widget sectionHeader(String title) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: FittedBox(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            TextButton(onPressed: () {}, child: Text("...See All")),
-          ],
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          TextButton(
+              onPressed: () {},
+              child: const Text(
+                "...See All",
+                style: TextStyle(color: Colors.blue),
+              )),
+        ],
       ),
     );
   }
 
-  Widget actionButton(String label, Color color) {
+  Widget actionButton(
+      String assetPath, BuildContext context, String label, Color color) {
     return Column(
       children: [
         Container(
-          height: 60,
-          width: 60,
+          height: context.height / 12,
+          width: context.width / 4,
+          margin: EdgeInsets.all(4),
+          padding: EdgeInsets.all(4),
           decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(8),
+            color: Colors.teal[100],
+            borderRadius: BorderRadius.circular(20),
           ),
-          child: Icon(Icons.abc), // Placeholder for icon
-        ),
-        SizedBox(height: 8),
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                assetPath,
+                height: context.height / 40,
+              ),
+              SizedBox(height: context.height / 90),
+              Text(
+                label,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ), // Placeholder for icon
         ),
       ],
     );
   }
 
-  Widget featuredPartnershipCard() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Container(
-        height: 150,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              blurRadius: 6,
-              spreadRadius: 2,
+  Widget featuredPartnershipCard(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+      height: context.height / 3,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            blurRadius: 6,
+            spreadRadius: 2,
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            height: context.height / 8.6,
+            // color: Colors.grey[300], // Placeholder for image
+            child: Image.asset(AppAssest.rectangle3),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Emeral LLC",
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                Text("Printing & Publishing",
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.teal,
+                    )),
+                Text(
+                    "Lorem ip dolor sit amet, consectetur adipscingelit, sed do enusmod tempor incididunt ut laboreet dolore magna aliqua, massa enim nec",
+                    style: TextStyle(color: Colors.grey)),
+                SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Asking for N120M"),
+                    Text("57.75% Remaining",
+                        style: TextStyle(color: Colors.green)),
+                  ],
+                ),
+              ],
             ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 100,
-              color: Colors.grey[300], // Placeholder for image
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Emeral LLC",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  Text("Printing & Publishing",
-                      style: TextStyle(color: Colors.grey)),
-                  SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Asking for N120M"),
-                      Text("57.75% Remaining",
-                          style: TextStyle(color: Colors.green)),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -404,4 +472,10 @@ class HomeScreen extends StatelessWidget {
       child: Center(child: Text("Business for Sale")),
     );
   }
+}
+
+extension MediaQueryExtension on BuildContext {
+  double get width => MediaQuery.of(this).size.width;
+
+  double get height => MediaQuery.of(this).size.height;
 }
