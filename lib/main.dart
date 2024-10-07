@@ -44,7 +44,10 @@ class HomeScreen extends StatelessWidget {
                 child: Image.asset(AppAssest.house),
               ),
               Image.asset(AppAssest.bus),
-              Image.asset(AppAssest.diagram,color: Colors.black,),
+              Image.asset(
+                AppAssest.diagram,
+                color: Colors.black,
+              ),
               Image.asset(AppAssest.apartment),
               Image.asset(AppAssest.world),
             ],
@@ -247,7 +250,8 @@ class HomeScreen extends StatelessWidget {
               Text(
                 label,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
               ),
             ],
           ), // Placeholder for icon
@@ -273,11 +277,54 @@ class HomeScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(
-            width: double.infinity,
-            height: context.height / 8.6,
-            // color: Colors.grey[300], // Placeholder for image
-            child: Image.asset(AppAssest.rectangle3),
+          Stack(
+            children: [
+              SizedBox(
+                height: context.height / 8.0,
+                child: SizedBox(
+                  width: double.infinity,
+                  height: context.height / 8.6,
+                  // color: Colors.grey[300], // Placeholder for image
+                  child: Image.asset(AppAssest.rectangle3),
+                ),
+              ),
+              Positioned(
+                  bottom: 0.0,
+                  right: 10.0,
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 140,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFB6EBE4),
+                            borderRadius: BorderRadius.circular(10.0)),
+                        child: const Center(
+                          child: Text(
+                            "Asking For N120M",
+                            style: TextStyle(color: Color(0xFF076B5E)),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10.0,
+                      ),
+                      Container(
+                        width: 140,
+                        height: 30,
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFB6EBE4),
+                            borderRadius: BorderRadius.circular(10.0)),
+                        child: const Center(
+                          child: Text(
+                            "60.005 - 5 months",
+                            style: TextStyle(color: Color(0xFF076B5E)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ))
+            ],
           ),
           const Padding(
             padding: EdgeInsets.all(16.0),
