@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                 child: Image.asset(AppAssest.house),
               ),
               Image.asset(AppAssest.bus),
-              Image.asset(AppAssest.diagram),
+              Image.asset(AppAssest.diagram,color: Colors.black,),
               Image.asset(AppAssest.apartment),
               Image.asset(AppAssest.world),
             ],
@@ -229,8 +229,8 @@ class HomeScreen extends StatelessWidget {
         Container(
           height: context.height / 12,
           width: context.width / 4,
-          margin: EdgeInsets.all(4),
-          padding: EdgeInsets.all(4),
+          margin: const EdgeInsets.all(4),
+          padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
             color: Colors.teal[100],
             borderRadius: BorderRadius.circular(20),
@@ -247,7 +247,7 @@ class HomeScreen extends StatelessWidget {
               Text(
                 label,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
               ),
             ],
           ), // Placeholder for icon
@@ -259,7 +259,7 @@ class HomeScreen extends StatelessWidget {
   Widget featuredPartnershipCard(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
-      height: context.height / 2.8,
+      height: context.height / 2.5,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
@@ -299,15 +299,23 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text("Asking for N120M"),
-                    Text("57.75% Remaining",
-                        style: TextStyle(color: Colors.green)),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Asking for N120M"),
+                        SizedBox(height: 12),
+                        Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: ImageStackWidget(),
+                        ),
+                        SizedBox(),
+                      ],
+                    ),
+                    CircularProgressBar()
                   ],
-                ),
-                SizedBox(height: 12),
-                Row(
-                  children: [ImageStackWidget(), SizedBox()],
                 ),
               ],
             ),
@@ -649,6 +657,79 @@ class ImageStackWidget extends StatelessWidget {
                       ),
               ),
             ),
+        ],
+      ),
+    );
+  }
+}
+
+class CircularProgressBar extends StatefulWidget {
+  const CircularProgressBar({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _CircularProgressBarState createState() => _CircularProgressBarState();
+}
+
+class _CircularProgressBarState extends State<CircularProgressBar>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2), // Duration of the animation
+      vsync: this,
+    );
+
+    // Start the animation to 57.75%
+    _animation = Tween<double>(begin: 0, end: 0.5775).animate(_controller)
+      ..addListener(() {
+        setState(() {});
+      });
+
+    _controller.forward(); // Start the animation
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  width: context.width / 6,
+                  height: context.height / 14,
+                  child: CircularProgressIndicator(
+                    value: _animation.value,
+                    valueColor:
+                        const AlwaysStoppedAnimation<Color>(Colors.green),
+                    backgroundColor: Colors.grey[300],
+                  ),
+                ),
+                Text(
+                  "${(_animation.value * 100).toStringAsFixed(2)}%", // Display the percentage
+                  style: const TextStyle(
+                      color: Colors.green, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+          const Text("Remaining", style: TextStyle(color: Colors.green)),
         ],
       ),
     );
